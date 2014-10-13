@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 var program = require('commander');
-var dpanel = require('./lib/dpanel.js');
+var dpanel = require('../lib/dpanel.js');
 
 
 program.version('0.0.1');
