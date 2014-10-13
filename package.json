@@ -20,5 +20,6 @@
   "bugs": {
     "url": "https://github.com/uptownhr/dpanel/issues"
   },
-  "homepage": "https://github.com/uptownhr/dpanel"
+  "homepage": "https://github.com/uptownhr/dpanel",
+    "dpanel": "dpanel.js"
 }
