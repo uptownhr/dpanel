@@ -4,7 +4,7 @@ var program = require('commander');
 var dpanel = require('../lib/dpanel.js');
 
 
-program.version('0.0.1');
+program.version('0.0.4');
 
 program.command('init')
     .description('initialize dpanel images')

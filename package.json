@@ -1,6 +1,6 @@
 {
   "name": "dpanel",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "",
   "main": "dpanel.js",
   "dependencies": {
