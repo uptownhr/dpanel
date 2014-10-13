@@ -1,0 +1,24 @@
+{
+  "name": "dpanel",
+  "version": "0.0.0",
+  "description": "",
+  "main": "dpanel.js",
+  "dependencies": {
+    "commander": "~2.3.0",
+    "dockerode": "~2.0.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/uptownhr/dpanel.git"
+  },
+  "author": "James Lee <jlee@penguin.ws> (http://jlee.biz/)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/uptownhr/dpanel/issues"
+  },
+  "homepage": "https://github.com/uptownhr/dpanel"
+}
