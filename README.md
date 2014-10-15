@@ -1,4 +1,4 @@
-#DPanel
+#dpanel
 The easiest way to convert your VM into a VirtualHost webserver.
 
 ##Get Started
