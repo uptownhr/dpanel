@@ -8,7 +8,7 @@ The easiest way to convert your VM into a VirtualHost webserver.
 
 
 ##coreos
-If nodejs is not available on the host. Install Dpanel inside a docker container.
+If nodejs is not available on the host. Install dpanel inside a docker container.
 
 1. docker run -i -t -v /var/run/docker.sock:/var/run/docker.sock ubuntu /bin/bash
 2. apt-get update
@@ -51,5 +51,5 @@ The server now has a wordpress blog listening on myblog.com.
 
 ##Todo
 
-1. Create a list of dpanel ready images. *Most web host related docker images should already be Dpanel ready.
+1. Create a list of dpanel ready images. *Most web host related docker images should already be dpanel ready.
 2. Create a dpanel docker image. For systems that do not support nodejs.
