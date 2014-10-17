@@ -49,7 +49,28 @@ The server now has a wordpress blog listening on myblog.com.
     -h, --help           output usage information
     -i, --image [image]  Specify [image] to create container with
 
-##Todo
+##dpanel API.js
+With api.js, get access the CLI commands through HTTP
 
+1. node api.js (recommended to run with forever so it is long living)
+2. go to http://domain:3100/user/login #need to improve
+3. start: http://domain:3100/start/testing.com
+4. list: http://domain:3100/list
+5. stop: http://domain:3100/stop/testing.com
+
+###routes
+
+####Start a domain
+`/start/:domain/:image?
+
+####List domains
+`/list
+
+####Stop a domain
+`/stop/:domain
+
+
+
+##Todo
 1. Create a list of dpanel ready images. *Most web host related docker images should already be dpanel ready.
 2. Create a dpanel docker image. For systems that do not support nodejs.

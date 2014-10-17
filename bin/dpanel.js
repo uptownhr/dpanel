@@ -20,6 +20,7 @@ program.command('start <domain>')
             case 'wordpress':
                 image = 'oskarhane/docker-wordpress-nginx-ssh';
                 break;
+            default: image = options.image;
         }
         dpanel.start(domain,image)
             .then(function(container){
