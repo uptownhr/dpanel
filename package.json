@@ -28,6 +28,6 @@
   },
   "homepage": "https://github.com/uptownhr/dpanel",
   "bin": {
-    "dpanel": "./bin/dpanel"
+    "dpanel": "./bin/dpanel.js"
   }
 }

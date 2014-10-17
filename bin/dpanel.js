@@ -21,8 +21,29 @@ program.command('start <domain>')
                 image = 'oskarhane/docker-wordpress-nginx-ssh';
                 break;
         }
-        dpanel.start(domain,image);
+        dpanel.start(domain,image)
+            .then(function(container){
+                console.log('started',container);
+            }).fail(console.log);
     });
+
+program.command('stop <domain>')
+    .description('stop a site')
+    .action(function(domain){
+        dpanel.stop(domain).then(console.log,console.log);
+    })
+
+program.command('list')
+    .description('list available sites')
+    .action( function(){
+        dpanel.list().then( function(containers){
+            containers.forEach( function(container){
+                console.log(container.Names[0],container.Status);
+            })
+        })
+    })
+
+
 
 program.parse(process.argv);
 
