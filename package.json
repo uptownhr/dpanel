@@ -1,6 +1,6 @@
 {
   "name": "dpanel",
-  "version": "0.0.14",
+  "version": "0.0.15",
   "description": "",
   "main": "dpanel.js",
   "dependencies": {
@@ -11,7 +11,8 @@
     "mongoose": "^3.8.17",
     "express-session": "^1.9.0",
     "connect-mongo": "^0.4.1",
-    "body-parser": "^1.9.0"
+    "body-parser": "^1.9.0",
+    "underscore": "^1.7.0"
   },
   "devDependencies": {},
   "scripts": {
