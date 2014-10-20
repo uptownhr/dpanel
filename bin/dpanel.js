@@ -34,6 +34,12 @@ program.command('stop <domain>')
         dpanel.stop(domain).then(console.log,console.log);
     })
 
+program.command('delete <domain>')
+    .description('stop a site')
+    .action(function(domain){
+        dpanel.delete(domain).then(console.log,console.log);
+    })
+
 program.command('list')
     .description('list available sites')
     .action( function(){
