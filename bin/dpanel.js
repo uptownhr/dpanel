@@ -2,6 +2,7 @@
 
 var program = require('commander');
 var dpanel = require('../lib/dpanel.js');
+var forever = require('forever');
 
 
 program.version('0.0.4');
@@ -9,7 +10,25 @@ program.version('0.0.4');
 program.command('init')
     .description('initialize dpanel images')
     .action( function(){
-        dpanel.init();
+        dpanel.init().then(console.log).fail(console.log).done(function(){
+            forever.list(false,function(err,processes,a){
+                var running = false;
+                if(processes){
+                    running = processes.some( function(process){
+                        return (process.file == '../api.js');
+                    });
+                }
+
+                if(!running){
+                    var child = forever.startDaemon('../api.js',{
+                        max: 3,
+                        silent: true,
+                        options: []
+                    });
+                }
+            });
+
+        });
     });
 
 program.command('start <domain>')
