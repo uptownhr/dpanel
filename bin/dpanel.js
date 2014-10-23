@@ -64,7 +64,7 @@ dpanel.init().finally( function(){
         })
 
     program.command('delete <domain>')
-        .description('stop a site')
+        .description('delete a site')
         .action(function(domain){
             dpanel.delete(domain).then(console.log,console.log);
         })

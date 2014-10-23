@@ -3,23 +3,9 @@ The easiest way to convert your VM into a VirtualHost webserver.
 
 ##Get Started
 1. npm install -g dpanel
-2. dpanel init
-3. dpanel start -i wordpress myblog.com
+2. dpanel start myblog.com
 
-
-##coreos
-If nodejs is not available on the host. Install dpanel inside a docker container.
-
-1. docker run -i -t -v /var/run/docker.sock:/var/run/docker.sock ubuntu /bin/bash
-2. apt-get update
-3. apt-get install node.js
-4. apt-get install npm
-5. ln -s /usr/bin/nodejs /usr/bin/node
-6. npm install -g dpanel
-7. dpanel init
-8. dpanel start -i wordpress myblog.com
-
-The server now has a wordpress blog listening on myblog.com. 
+Checkout the [docker dpanel image][dpanel-docker] if you don't want to install node and npm.
 
 ##dpanel cli help
     dpanel --help
@@ -27,9 +13,9 @@ The server now has a wordpress blog listening on myblog.com.
     Usage: dpanel [options] [command]
 
     Commands:
-
-    init 
-       initialize dpanel images
+    
+    init-api 
+       initialize dpanel restful API *Optional if you want restful API access
     
     start [options] <domain>
        start a vhost with image
@@ -49,19 +35,29 @@ The server now has a wordpress blog listening on myblog.com.
     -h, --help           output usage information
     -i, --image [image]  Specify [image] to create container with
 
+##Under the hood
+Dpanel is made up a few components
+
+1. dpanel CLI, pull images and starts containers
+2. jwilder/nginx-proxy docker image, listens for new "domain.com" containers and automatically creates the nginx virtual host file for container forwarding
+3. dpanel restful API, access to dpanel actions through HTTP
+4. dpanel docker image. Optional docker image if you don't want to install nodejs/npm.
+
 ##dpanel API.js
 With api.js, get access the CLI commands through HTTP
 
-1. node api.js (recommended to run with forever so it is long living)
-2. go to http://domain:3100/user/login #need to improve
+1. dpanel init-api
+2. go to http://domain:3100/user/login #need to improve *currently not activated
 3. start: http://domain:3100/start/testing.com
 4. list: http://domain:3100/list
 5. stop: http://domain:3100/stop/testing.com
 
 ###routes
+####Start a domain, defaults to using a wordpress image
+`/start/:domain
 
-####Start a domain
-`/start/:domain/:image?
+####Start a domain and specify image to use
+`/start/:domain/:user_repo/:image?
 
 ####List domains
 `/list
@@ -69,6 +65,17 @@ With api.js, get access the CLI commands through HTTP
 ####Stop a domain
 `/stop/:domain
 
+####Delete a domain. *If you want to recreate a domain with another image 
+`/delete/:domain
+
+##[dpanel-docker] coreos
+If nodejs is not available on the host. Pull the dpanel docker image
+
+1. docker pull uptownhr/dpanel 
+2. docker run -i -t -v /var/run/docker.sock:/var/run/docker.sock uptownhr/dpanel /bin/bash
+3. dpanel start myblog.com
+
+The server now has a wordpress blog listening on myblog.com. 
 
 
 ##Todo
