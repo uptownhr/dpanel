@@ -1,5 +1,5 @@
 #Dpanel
-Dpanel helps you manage running multiple websites with your Docker server.
+An easy way to run multiple websites using Docker.
 - Manages reverse nginx proxy for you.
 - Creates, start, and stop containers for you.
 
