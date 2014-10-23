@@ -5,7 +5,7 @@ The easiest way to convert your VM into a VirtualHost webserver.
 1. npm install -g dpanel
 2. dpanel start myblog.com
 
-Checkout the [docker dpanel image][dpanel-docker] if you don't want to install node and npm.
+Checkout the [docker dpanel image] (#dpanel-docker) if you don't want to install node and npm.
 
 ##dpanel cli help
     dpanel --help
