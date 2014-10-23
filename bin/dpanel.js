@@ -4,7 +4,7 @@ var program = require('commander');
 var dpanel = require('../lib/dpanel.js');
 var forever = require('forever');
 
-program.version('0.0.4');
+program.version('0.0.23');
 
 dpanel.init().finally( function(){
     forever.list(false,function(err,processes,a){
@@ -32,6 +32,14 @@ dpanel.init().finally( function(){
 
             });
         });*/
+
+    program.command('init-api')
+        .description('starts api server')
+        .action( function(){
+            dpanel.start_api().then(function(res){
+                console.log(res);
+            });
+        });
 
     program.command('start <domain>')
         .description('start a vhost with image')

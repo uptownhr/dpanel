@@ -1,17 +1,17 @@
-var mongoose = require('mongoose');
+//var mongoose = require('mongoose');
 var express = require('express');
 var bodyParser = require('body-parser');
-var session = require('express-session');
-var MongoStore = require('connect-mongo')(session);
+//var session = require('express-session');
+//var MongoStore = require('connect-mongo')(session);
 var dpanel = require('./lib/dpanel.js');
 
 var project = 'dpanel';
-var port = 3100;
+var port = 9999;
 var app = express();
 
 app.use(bodyParser.urlencoded({extended:false}))
 
-app.use(session({
+/*app.use(session({
     secret: 'jujubee',
     store: new MongoStore({
         db: project
@@ -19,9 +19,9 @@ app.use(session({
     cookie: {
         maxAge: 1000 * 60 * 60 * 24 * 365
     }
-}));
+}));*/
 
-app.use( function(req,res,next){
+/*app.use( function(req,res,next){
     var session = req.session;
 
     if(session.user){
@@ -29,17 +29,17 @@ app.use( function(req,res,next){
     }
 
     next();
-});
+});*/
 
-app.get('/user', testing(), function(req,res){
+app.get('/user', function(req,res){
     res.send(req.user);
 });
 
-app.post('/user/login', authenticate, function(req,res){
+app.post('/user/login', function(req,res){
     res.send(req.user);
 });
 
-app.use(isAdmin);
+//app.use(isAdmin);
 
 app.get('/list', function(req,res){
     dpanel.list().then( function(containers) {
