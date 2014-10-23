@@ -11,10 +11,13 @@ Dpanel helps you manage running multiple websites with your Docker server.
 1. Remote into your Dpanel, run ```docker attach dpanel```
 2. ```dpanel start myblog.com```
 By default, dpanel creates a container with a wordpress image.
-To specify another, just pass the —i flag (ie; dpanel start -i somerepo/someimage)
+To specify another, just pass the -i flag (ie; dpanel start -i somerepo/someimage)
 3. ```dpanel stop myblog.com```
+Stops the container
 4. ```dpanel delete myblog.com```
+Deletes the container
 5. ```dpanel list```
+Lists all the running containers
 
 ##Dpanel cli help
     dpanel --help
