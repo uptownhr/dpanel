@@ -1,7 +1,8 @@
 #Dpanel
-An easy way to run multiple websites using Docker.
-- Manages reverse nginx proxy for you.
-- Creates, start, and stop containers for you.
+Dpanel makes hosting websites incredibly simple.
+Think of it as cPanel, DirectAdmin, MAMP/WAMP style control panel, but with Docker technology. 
+You can run multiple sites with unique domains that automatically maps to your containers.
+
 
 ##Get Started
 1. docker pull uptownhr/dpanel
