@@ -9,7 +9,7 @@ You can run multiple sites with unique domains that automatically maps to your c
 2. ```docker run -i -t --name dpanel -v /var/run/docker.sock:/var/run/docker.sock uptownhr/dpanel /bin/bash```
 
 ##How to use
-1. Remote into your Dpanel, run ```docker attach dpanel```
+1. If not already, remote into your Dpanel and run ```docker attach dpanel```
 2. ```dpanel start myblog.com```
 By default, dpanel creates a container with a wordpress image.
 To specify another, just pass the -i flag (ie; dpanel start -i somerepo/someimage)
