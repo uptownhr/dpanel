@@ -68,7 +68,7 @@ With api.js, get access the CLI commands through HTTP
 ####Delete a domain. *If you want to recreate a domain with another image 
 `/delete/:domain
 
-##[dpanel-docker] coreos
+##dpanel Docker
 If nodejs is not available on the host. Pull the dpanel docker image
 
 1. docker pull uptownhr/dpanel 
