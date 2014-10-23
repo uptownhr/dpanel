@@ -4,7 +4,7 @@ var program = require('commander');
 var dpanel = require('../lib/dpanel.js');
 var forever = require('forever');
 
-program.version('0.0.23');
+program.version('0.0.26');
 
 dpanel.init().finally( function(){
     forever.list(false,function(err,processes,a){
