@@ -1,6 +1,6 @@
 #Dpanel
 Dpanel makes hosting websites incredibly simple.
-Think of it as cPanel, DirectAdmin, MAMP/WAMP style control panel, but with Docker technology. 
+Think of it as cPanel, DirectAdmin, MAMP/WAMP style control panel, but using Docker technology. 
 You can run multiple sites with unique domains that automatically maps to your containers.
 
 
