@@ -6,7 +6,7 @@ You can run multiple sites with unique domains that automatically maps to your c
 
 ##Get Started
 1. docker pull uptownhr/dpanel
-2. docker run —-name=dpanel i -t -v /var/run/docker.sock:/var/run/docker.sock uptownhr/dpanel /bin/bash
+2. ```docker run -i -t --name dpanel -v /var/run/docker.sock:/var/run/docker.sock uptownhr/dpanel /bin/bash```
 
 ##How to use
 1. Remote into your Dpanel, run ```docker attach dpanel```
