@@ -80,4 +80,3 @@ The server now has a wordpress blog listening on myblog.com.
 
 ##Todo
 1. Create a list of dpanel ready images. *Most web host related docker images should already be dpanel ready.
-2. Create a dpanel docker image. For systems that do not support nodejs.
