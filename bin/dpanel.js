@@ -3,6 +3,7 @@
 var program = require('commander');
 var dpanel = require('../lib/dpanel.js');
 var forever = require('forever');
+var prompt = require('prompt');
 
 program.version('0.0.29');
 
@@ -41,20 +42,50 @@ dpanel.init().finally( function(){
             });
         });
 
-    program.command('start <domain>')
+    program.command('start <domain> [image]')
         .description('start a vhost with image')
         .option('-i, --image [image]','Specify [image] to create container with', 'wordpress')
-        .action( function(domain,options){
-            switch(options.image){
-                case 'wordpress':
-                    image = 'oskarhane/docker-wordpress-nginx-ssh';
-                    break;
-                default: image = options.image;
+        .action( function(domain,image,options){
+            if(!image){
+                //
+                // Setting these properties customizes the prompt.
+                //
+                prompt.message = "\nOops! Please choose an image to start the server with. Here are some examples to choose from\n\n".cyan;
+                prompt.message += "Pick a number or the docker registry image name\n";
+                prompt.message += "1: oskarhane/docker-wordpress-nginx-ssh\n";
+                prompt.message += "2: jaequery/lemp\n\n";
+
+                prompt.delimiter = "\n".green;
+
+
+                prompt.get({
+                    properties: {
+                        name: {
+                            description: ":".magenta
+                        }
+                    }
+                }, function (err, result) {
+                    if(err){return err}
+                    switch (result.name){
+                        case '1': image = 'oskarhane/docker-wordpress-nginx-ssh'; break;
+                        case '2': image = 'jaequery/lemp'; break;
+                        default: image = result.name;
+                    }
+                    console.log("You selected: ".cyan + image);
+
+                    dpanel.start(domain,image)
+                        .then(function(container){
+                            console.log('started',container);
+                        }).fail(console.log);
+                });
+            }else{
+                dpanel.start(domain,image)
+                    .then(function(container){
+                        console.log('started',container);
+                    }).fail(console.log);
             }
-            dpanel.start(domain,image)
-                .then(function(container){
-                    console.log('started',container);
-                }).fail(console.log);
+
+
         });
 
     program.command('stop <domain>')
