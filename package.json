@@ -1,20 +1,21 @@
 {
   "name": "dpanel",
-  "version": "0.0.30",
+  "version": "0.0.31",
   "description": "",
   "main": "dpanel.js",
   "dependencies": {
-    "commander": "~2.3.0",
-    "dockerode": "~2.0.3",
-    "q": "^1.0.1",
-    "express": "^4.9.7",
-    "mongoose": "^3.8.17",
-    "express-session": "^1.9.0",
-    "connect-mongo": "^0.4.1",
     "body-parser": "^1.9.0",
-    "underscore": "^1.7.0",
+    "cli-table": "^0.3.1",
+    "commander": "~2.3.0",
+    "connect-mongo": "^0.4.1",
+    "dockerode": "~2.0.3",
+    "express": "^4.9.7",
+    "express-session": "^1.9.0",
     "forever": "^0.11.1",
-    "prompt": "^0.2.14"
+    "mongoose": "^3.8.17",
+    "prompt": "^0.2.14",
+    "q": "^1.0.1",
+    "underscore": "^1.7.0"
   },
   "devDependencies": {},
   "scripts": {

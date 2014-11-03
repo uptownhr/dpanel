@@ -4,8 +4,9 @@ var program = require('commander');
 var dpanel = require('../lib/dpanel.js');
 var forever = require('forever');
 var prompt = require('prompt');
+var Table = require('cli-table');
 
-program.version('0.0.29');
+program.version('0.0.31');
 
 dpanel.init().finally( function(){
     forever.list(false,function(err,processes,a){
@@ -34,13 +35,13 @@ dpanel.init().finally( function(){
             });
         });*/
 
-    program.command('init-api')
+    /*program.command('init-api')
         .description('starts api server')
         .action( function(){
             dpanel.start_api().then(function(res){
                 console.log(res);
             });
-        });
+        });*/
 
     program.command('start <domain> [image]')
         .description('start a vhost with image')
@@ -50,13 +51,12 @@ dpanel.init().finally( function(){
                 //
                 // Setting these properties customizes the prompt.
                 //
-                prompt.message = "\nOops! Please choose an image to start the server with. Here are some examples to choose from\n\n".cyan;
-                prompt.message += "Pick a number or the docker registry image name\n";
-                prompt.message += "1: oskarhane/docker-wordpress-nginx-ssh\n";
-                prompt.message += "2: jaequery/lemp\n\n";
-
-                prompt.delimiter = "\n".green;
-
+                message = "\nOops! Please choose an image to start the server with. Here are some examples to choose from\n\n".cyan;
+                message += "Pick a number or the docker registry image name\n";
+                message += "1: oskarhane/docker-wordpress-nginx-ssh\n";
+                message += "2: jaequery/lemp\n\n";
+                console.log(message);
+                /*prompt.delimiter = "\n".green;*/
 
                 prompt.get({
                     properties: {
@@ -104,9 +104,17 @@ dpanel.init().finally( function(){
         .description('list available sites')
         .action( function(){
             dpanel.list().then( function(containers){
+                var table = new Table({
+                    head: ['Domain'.cyan,'Image'.cyan,'Uptime'.cyan]
+                });
                 containers.forEach( function(container){
-                    console.log(container.Names[0],container.Status);
-                })
+                    table.push(
+                        [container.Names[0].substring(1),container.Image, container.Status]
+                    );
+
+                    //console.log(container.Names[0].substring(1),'\t\t\t - using: ',container.Image,container.Status);
+                });
+                console.log(table.toString());
             })
         })
 
