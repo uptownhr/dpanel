@@ -26,64 +26,55 @@ dpanel.init().finally( function(){
         }
     });
 
-    /*program.command('init')
-        .description('initialize dpanel images')
-        .action( function(){
-            dpanel.init().then(console.log).fail(console.log).done(function(){
-
-
-            });
-        });*/
-
-    /*program.command('init-api')
-        .description('starts api server')
-        .action( function(){
-            dpanel.start_api().then(function(res){
-                console.log(res);
-            });
-        });*/
-
     program.command('start <domain> [image]')
         .description('start a vhost with image')
         .option('-i, --image [image]','Specify [image] to create container with', 'wordpress')
         .action( function(domain,image,options){
             if(!image){
-                //
-                // Setting these properties customizes the prompt.
-		var repos = [
-		    {id: 1, name: 'Wordpress', image: 'oskarhane/docker-wordpress-nginx-ssh'},
-		    {id: 2, name: 'LEMP - PHP 5.6', image: 'jaequery/lemp'},
-		    {id: 3, name: 'Drupal', image: 'b7alt/drupal'}
-		];
-                message = "\nPick a number or type in a docker registry image\n\n".cyan;
-		repos.forEach(function(repo){
-                    message += repo.id+": "+repo.name+" ("+repo.image+")\n";
-		});
-                console.log(message);
-                /*prompt.delimiter = "\n".green;*/
-
-                prompt.get({
-                    properties: {
-                        name: {
-                            description: ":".magenta
-                        }
-                    }
-                }, function (err, result) {
-                    if(err){return err}
-
-		    image = result.name;
-		    repos.forEach(function(repo){
-			if(repo.id == result.name){
-			    image = repo.image;
-			}
-		    });
-
-                    console.log("You selected: ".cyan + image);
-
-                    dpanel.start(domain,image)
+                dpanel.docker.containerExistsByName(domain).then(function(container){
+                    dpanel.start(domain,container.Image)
                         .then(function(container){
                             console.log('started',container);
                         }).fail(console.log);
+                }).fail(function(){
+                    //
+                    // Setting these properties customizes the prompt.
+                    //
+                    var repos = [
+                        {id: 1, name: 'Wordpress', image: 'oskarhane/docker-wordpress-nginx-ssh'},
+                        {id: 2, name: 'LEMP - PHP 5.6', image: 'jaequery/lemp'},
+                        {id: 3, name: 'Drupal', image: 'b7alt/drupal'}
+                    ];
+                    message = "\nPick a number or type in a docker registry image\n\n".cyan;
+                    repos.forEach(function(repo){
+                        message += repo.id+": "+repo.name+" ("+repo.image+")\n";
+                    });
+                    console.log(message);
+                    /*prompt.delimiter = "\n".green;*/
+
+                    prompt.get({
+                        properties: {
+                            name: {
+                                description: ":".magenta
+                            }
+                        }
+                    }, function (err, result) {
+                        if(err){return err}
+
+                        image = result.name;
+                        repos.forEach(function(repo){
+                            if(repo.id == result.name){
+                                image = repo.image;
+                            }
+                        });
+
+                        console.log("You selected: ".cyan + image);
+
+                        dpanel.start(domain,image)
+                            .then(function(container){
+                                console.log('started',container);
+                            }).fail(console.log);
+                    });
                 });
             }else{
                 dpanel.start(domain,image)

@@ -4,7 +4,7 @@
   "description": "",
   "main": "dpanel.js",
   "dependencies": {
-    "body-parser": "^1.9.0",
+    "body-parser": "^1.9.2",
     "cli-table": "^0.3.1",
     "commander": "~2.3.0",
     "connect-mongo": "^0.4.1",
