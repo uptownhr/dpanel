@@ -50,11 +50,15 @@ dpanel.init().finally( function(){
             if(!image){
                 //
                 // Setting these properties customizes the prompt.
-                //
-                message = "\nOops! Please choose an image to start the server with. Here are some examples to choose from\n\n".cyan;
-                message += "Pick a number or the docker registry image name\n";
-                message += "1: oskarhane/docker-wordpress-nginx-ssh\n";
-                message += "2: jaequery/lemp\n\n";
+		var repos = [
+		    {id: 1, name: 'Wordpress', image: 'oskarhane/docker-wordpress-nginx-ssh'},
+		    {id: 2, name: 'LEMP - PHP 5.6', image: 'jaequery/lemp'},
+		    {id: 3, name: 'Drupal', image: 'b7alt/drupal'}
+		];
+                message = "\nPick a number or type in a docker registry image\n\n".cyan;
+		repos.forEach(function(repo){
+                    message += repo.id+": "+repo.name+" ("+repo.image+")\n";
+		});
                 console.log(message);
                 /*prompt.delimiter = "\n".green;*/
 
@@ -66,11 +70,14 @@ dpanel.init().finally( function(){
                     }
                 }, function (err, result) {
                     if(err){return err}
-                    switch (result.name){
-                        case '1': image = 'oskarhane/docker-wordpress-nginx-ssh'; break;
-                        case '2': image = 'jaequery/lemp'; break;
-                        default: image = result.name;
-                    }
+
+		    image = result.name;
+		    repos.forEach(function(repo){
+			if(repo.id == result.name){
+			    image = repo.image;
+			}
+		    });
+
                     console.log("You selected: ".cyan + image);
 
                     dpanel.start(domain,image)
