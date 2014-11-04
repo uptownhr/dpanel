@@ -6,7 +6,7 @@ var forever = require('forever');
 var prompt = require('prompt');
 var Table = require('cli-table');
 
-program.version('0.0.31');
+program.version('0.0.33');
 
 dpanel.init().finally( function(){
     forever.list(false,function(err,processes,a){
