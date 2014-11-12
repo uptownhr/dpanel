@@ -5,6 +5,7 @@ var dpanel = require('../lib/dpanel.js');
 var forever = require('forever');
 var prompt = require('prompt');
 var Table = require('cli-table');
+var exec = require('child_process').exec;
 
 program.version('0.0.33');
 
@@ -96,6 +97,60 @@ dpanel.init().finally( function(){
         .description('delete a site')
         .action(function(domain){
             dpanel.delete(domain).then(console.log,console.log);
+        })
+
+    program.command('keys <action>')
+        .description("generate - creates ssh keys\n   copy - copies pubkey to a container of choice")
+        .action(function(action){
+	    switch(action){
+	    case "generate":
+		console.log("type this to generate your ssh keys: ssh-keygen -t rsa");
+		break;
+		/*
+	    case "set":
+		prompt.get({
+                    properties: {
+                        pubkey: {
+                            description: "Paste your id_rsa.pub key"
+                        }
+                    }
+                }, function (err, result) {
+                    if(err){return err}		    
+                    pubkey = result.pubkey;
+		    if(pubkey != ''){
+			exec("echo '"+pubkey+"' > ~/.ssh/id_rsa.pub", function (error, stdout, stderr) {
+			    // output is in stdout
+			    console.log("Pubkey saved");
+			});
+		    }else{
+			console.log("Can't be empty, try again");
+		    }
+                });
+		break;
+		*/
+	    case "copy":
+		prompt.get({
+                    properties: {
+                        domain: {
+                            description: "Type the name of domain you wish to copy the pubkey to"
+                        }
+                    }
+                }, function (err, result) {
+                    if(err){return err}
+		    var domain = result.domain;
+		    console.log('copying pubkey to container: ' +domain);
+		    dpanel.docker.containerExistsByName(domain).then(function(container){
+			var dest_path = '/var/lib/docker/aufs/mnt/'+container.Id+'/root/';
+			exec("cp -Rfp ~/.ssh " + dest_path, function (error, stdout, stderr){
+			    console.log('pubkey successfully copied');
+			});
+		    }).fail(console.log);
+
+                });
+
+		break;
+
+	    }
         })
 
     program.command('list')
