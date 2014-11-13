@@ -7,7 +7,7 @@ var prompt = require('prompt');
 var Table = require('cli-table');
 var exec = require('child_process').exec;
 
-program.version('0.0.34');
+program.version('0.0.35');
 
 dpanel.init().finally( function(){
     forever.list(false,function(err,processes,a){
