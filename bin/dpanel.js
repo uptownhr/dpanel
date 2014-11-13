@@ -7,7 +7,7 @@ var prompt = require('prompt');
 var Table = require('cli-table');
 var exec = require('child_process').exec;
 
-program.version('0.0.33');
+program.version('0.0.34');
 
 dpanel.init().finally( function(){
     forever.list(false,function(err,processes,a){
@@ -115,7 +115,7 @@ dpanel.init().finally( function(){
                         }
                     }
                 }, function (err, result) {
-                    if(err){return err}		    
+                    if(err){return err}
                     pubkey = result.pubkey;
 		    if(pubkey != ''){
 			exec("echo '"+pubkey+"' > ~/.ssh/id_rsa.pub", function (error, stdout, stderr) {
